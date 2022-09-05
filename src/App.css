@@ -6,7 +6,8 @@
 }
 
 body {
-  background-image: url(/src/assets/noche1.jpg);
+  background-image: url(https://i.postimg.cc/bv5q3LGw/soleado1.jpg);
+  background-repeat: no-repeat;
 }
 
 .App {
