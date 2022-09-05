@@ -137,7 +137,7 @@ body {
 
 .main-div select, input {
   background: transparent;
-  border: 0.2px solid black;
+  border: 0.2px solid rgb(0, 0, 0,0.3);
 }
 
 .main-informations {

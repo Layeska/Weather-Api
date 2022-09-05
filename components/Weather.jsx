@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios";
-import useAxios from "../src/hooks/useAxios"
-import paises from "../src/paises.json"
-import citylist from "../src/citylist.json"
+/*import useAxios from "../hooks/useAxios"
+import paises from "../paises.json"*/
+import citylist from "../citylist.json"
 
 const Weather = () => {
 
