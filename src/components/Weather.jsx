@@ -4,6 +4,7 @@ import axios from "axios";
 const Weather = () => {
     //Variables de cambio de las cuidades, grados y pantalla de carga
     const [value, setValue] = useState({})
+    
     const [isCity, setIsCity] = useState({})
 
     const [isDegree, setIsDegree] = useState(true)
