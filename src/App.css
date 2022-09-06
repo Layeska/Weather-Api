@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url(https://i.postimg.cc/bv5q3LGw/soleado1.jpg);
+  background-image: url(./assets/ta.jpg);
   background-repeat: no-repeat;
 }
 
@@ -59,6 +59,30 @@ body {
   border-radius: 5px;
   height: 100%;
   
+}
+
+.main-div input {
+  margin-left: 10px;
+  border-radius: 10px;
+}
+
+.main-div .search {
+  width: 40px;
+  height: 28px;
+  margin-left: 10px;
+  margin-top: -3px;
+  position: absolute;
+  background: transparent;
+}
+
+.search:hover {
+  background: rgb(0, 0, 0, 0.4);
+}
+
+.search i {
+  margin-left: -7px;
+  position: absolute;
+  margin-top: -8px;
 }
 
 .main-div hr {
@@ -140,7 +164,7 @@ body {
   border: 0.2px solid rgb(0, 0, 0,0.3);
 }
 
-.main-informations {
+.main-information {
   background: rgb(102, 100, 97,0.2);
   border-radius: 50px;
   width: 85%;
@@ -150,7 +174,7 @@ body {
   
 }
 
-.main-informations2 {
+.main-informationPlus {
   margin-top: 15px;
 }
 
