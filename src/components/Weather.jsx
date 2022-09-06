@@ -22,7 +22,7 @@ const Weather = () => {
             console.log(cityUbi)
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setValue(res.data)).finally(() => setLoading(false))
-            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityUbi}}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setIsCity(res.data)).catch(alert('Country not found')).finally(() => setLoading(false))
+           // axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityUbi}}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setIsCity(res.data)).catch(alert('Country not found')).finally(() => setLoading(false))
         } 
 
         changeTemp() //cambia el clima de farenheit a celsius y viceversa
@@ -55,6 +55,8 @@ const Weather = () => {
     const changeTempC = (temp) => { return temp - 273.15 }
     const changeTempF = (temp) => { return (temp - 273.15) * 9/5 + 32 }
 
+    const arrayIMG = ['../assets/ta.jpg', '../assets/fondo.jpg']
+
     return (
         <div className="card">
             { loading ? (
@@ -77,10 +79,12 @@ const Weather = () => {
                     <p className='feel'>Feels like {isDegree ? Math.round(changeTempC(value.main?.feels_like)) : Math.round(changeTempF(value.main?.feels_like))}º {isDegree ? 'C' : 'F'}</p>
                 </div>
                 <div  className='main-div'>
-                    <p>Search by Country</p>
+                    <h1 className="title">Weather Api</h1>
+                   {/* <p>Search by Country</p>
                     <label>City </label>
                     <input type='text'/>
-                    <button className='search'><i className='fa-solid fa-magnifying-glass'></i></button>
+            <button className='search'><i className='fa-solid fa-magnifying-glass'></i></button>*/}
+                   
                     <br/> <hr />
 
                     <div className='main-information'>
