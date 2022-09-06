@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react"
 import axios from "axios";
 
 const Weather = () => {
-
+    //Variables de cambio de las cuidades, grados y pantalla de carga
     const [value, setValue] = useState({})
     const [isCity, setIsCity] = useState({})
 
     const [isDegree, setIsDegree] = useState(true)
-
     const [loading, setLoading] = useState(true)
+
+    const changeTemp = () => setIsDegree(!isDegree) //funcion que cambia el estado del clima 
 
     useEffect(() => {
         const urlKey = 'a6bee11f6399d0eb9003ec59c2435b3e'
@@ -21,11 +22,11 @@ const Weather = () => {
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setValue(res.data)).finally(() => setLoading(false))
             //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityUbi}}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setIsCity(res.data)).catch(alert('Country not found')).finally(() => setLoading(false))
-    } 
+        } 
 
-    changeTemp()
+        changeTemp() //cambia el clima de farenheit a celsius y viceversa
     },[])
-    
+
     //Conseguir hora de PC
     const timePc = Date.now()
     const dateNow = new Date(timePc)
@@ -43,27 +44,15 @@ const Weather = () => {
     }
 
     //entra y sale el sol
-    var timeString = dateUTC.toLocaleString('en-US', options);
-    var timeString1 = dateUTCSunset.toLocaleString('en-US', options);
+    const timeString = dateUTC.toLocaleString('en-US', options);
+    const timeString1 = dateUTCSunset.toLocaleString('en-US', options);
 
     const date = new Date()
-    let now = new Intl.DateTimeFormat('en-US', options).format(date)
+    const now = new Intl.DateTimeFormat('en-US', options).format(date)
 
-    
-    // temperatura actual y como se siente en C y F
-
-    const tempF = (value.main?.temp - 273.15) * 9/5 + 32 
-    const tempF_like = (value.main?.feels_like - 273.15) * 9/5 + 32 
-    const tempC = value.main?.temp - 273.15 
-    const tempC_like = value.main?.feels_like - 273.15
-
-    const temMaxC = value.main?.temp_max - 273.15
-    const temMaxF = (value.main?.temp_max - 273.15) * 9/5 + 32
-
-    const tempMinC = value.main?.temp_min - 273.15
-    const temMinF = (value.main?.temp_min - 273.15) * 9/5 + 32
-
-    const changeTemp = () => setIsDegree(!isDegree)
+    // temperatura actual y como se siente en Celsius y Farenheit
+    const changeTempC = (temp) => { return temp - 273.15 }
+    const changeTempF = (temp) => { return (temp - 273.15) * 9/5 + 32 }
 
     return (
         <div className="card">
@@ -81,10 +70,10 @@ const Weather = () => {
                     <p className='description'>{value.weather?.[0].main}, {value.weather?.[0].description}</p>
 
                     <div className='tempe'>
-                        <p className='degreeC'>{isDegree ? Math.round(tempC) : Math.round(tempF)}º</p>
+                        <p className='degreeC'>{isDegree ? Math.round(changeTempC(value.main?.temp)) : Math.round(changeTempF(value.main?.temp))}º</p>
                         <button onClick={changeTemp} className='btn'>{isDegree ? 'C' : 'F'}</button>
                     </div>
-                    <p className='feel'>Feels like  {isDegree ? Math.round(tempC_like) : Math.round(tempF_like)}º {isDegree ? 'C' : 'F'}</p>
+                    <p className='feel'>Feels like {isDegree ? Math.round(changeTempC(value.main?.feels_like)) : Math.round(changeTempF(value.main?.feels_like))}º {isDegree ? 'C' : 'F'}</p>
                 </div>
                 <div  className='main-div'>
                     <p>Search by Country</p>
@@ -100,10 +89,10 @@ const Weather = () => {
                     </div>
 
                     <div className='main-informationPlus'>
-                        <p><i className='fa-solid fa-wind'></i> Wind Speed: {value.wind?.speed} mt/seg</p> {/**wind speed: */}
-                        <p><i className='fa-solid fa-temperature-arrow-up'></i>  Maximum Temperature: {isDegree ? Math.round(temMaxC) : Math.round(temMaxF)}º {isDegree ? 'C' : 'F'}</p> {/*maximum temperature: */}
-                        <p> <i className='fa-solid fa-temperature-arrow-down'></i> Minimum Temperature: {isDegree ? Math.round(tempMinC) : Math.round(temMinF)}º {isDegree ? 'C' : 'F'}</p> {/** minimum temperature:   */}
-                        <p><i className='fa-solid fa-temperature-high'></i> Pressure: {Math.round(value.main?.pressure)}  hPa</p> {/**Pressure:  */}
+                        <p><i className='fa-solid fa-wind'></i> Wind Speed: {value.wind?.speed} mt/seg</p>
+                        <p><i className='fa-solid fa-temperature-arrow-up'></i>  Maximum Temperature: {isDegree ? Math.round(changeTempC(value.main?.temp_max)) : Math.round(changeTempF(value.main?.temp_max))}º {isDegree ? 'C' : 'F'}</p>
+                        <p> <i className='fa-solid fa-temperature-arrow-down'></i> Minimum Temperature: {isDegree ? Math.round(changeTempC(value.main?.temp_min)) : Math.round(changeTempF(value.main?.temp_min))}º {isDegree ? 'C' : 'F'}</p>
+                        <p><i className='fa-solid fa-temperature-high'></i> Pressure: {Math.round(value.main?.pressure)}  hPa</p>
                     </div>
                     
                     <div className='hours'>
