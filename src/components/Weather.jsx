@@ -4,7 +4,7 @@ import axios from "axios";
 const Weather = () => {
     //Variables de cambio de las cuidades, grados y pantalla de carga
     const [value, setValue] = useState({})
-    
+
     const [isCity, setIsCity] = useState({})
 
     const [isDegree, setIsDegree] = useState(true)
@@ -22,7 +22,7 @@ const Weather = () => {
             console.log(cityUbi)
 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setValue(res.data)).finally(() => setLoading(false))
-            //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityUbi}}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setIsCity(res.data)).catch(alert('Country not found')).finally(() => setLoading(false))
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityUbi}}&appid=a6bee11f6399d0eb9003ec59c2435b3e`).then(res => setIsCity(res.data)).catch(alert('Country not found')).finally(() => setLoading(false))
         } 
 
         changeTemp() //cambia el clima de farenheit a celsius y viceversa
@@ -79,7 +79,7 @@ const Weather = () => {
                 <div  className='main-div'>
                     <p>Search by Country</p>
                     <label>City </label>
-                    <input type='text' placeholder='Managua'/>
+                    <input type='text'/>
                     <button className='search'><i className='fa-solid fa-magnifying-glass'></i></button>
                     <br/> <hr />
 
@@ -90,7 +90,7 @@ const Weather = () => {
                     </div>
 
                     <div className='main-informationPlus'>
-                        <p><i className='fa-solid fa-wind'></i> Wind Speed: {value.wind?.speed} mt/seg</p>
+                        <p><i className='fa-solid fa-wind'></i> Wind Speed:  {value.wind?.speed} mt/seg</p>
                         <p><i className='fa-solid fa-temperature-arrow-up'></i>  Maximum Temperature: {isDegree ? Math.round(changeTempC(value.main?.temp_max)) : Math.round(changeTempF(value.main?.temp_max))}º {isDegree ? 'C' : 'F'}</p>
                         <p> <i className='fa-solid fa-temperature-arrow-down'></i> Minimum Temperature: {isDegree ? Math.round(changeTempC(value.main?.temp_min)) : Math.round(changeTempF(value.main?.temp_min))}º {isDegree ? 'C' : 'F'}</p>
                         <p><i className='fa-solid fa-temperature-high'></i> Pressure: {Math.round(value.main?.pressure)}  hPa</p>
